@@ -21,12 +21,15 @@ for root, dirs, files in os.walk(input_var):
 		if (imghdr.what(page)) == "jpeg":
 			has_imgs = True
 	if  has_imgs:
-
+		print "criando : " + folder_name
 		#criando o zip so com imagens
 		with  closing ( ZipFile(folder_name, "w",  ZIP_DEFLATED) ) as zipcomic:	
 			for name in files:
 				page  =  os.path.join(root,name)
 			 	if (imghdr.what(page)) == "jpeg":
+
 			 		#cordando o path do arquivo
 			 		arc_name = page[len(input_var) + len(os.sep):]
 			 		zipcomic.write(page,arc_name)
+			 	else:
+			 		print "ignorado : " + name + " -  inconpativel com img"
